@@ -23,7 +23,16 @@ pipeline {
                 }
             }
         }
-        stage("Paso 3: Build .Jar"){
+        stage("Paso 3: Test 2"){
+            steps {
+                script {
+                sh "echo 'Test Code!'"
+                // Run Maven on a Unix agent.
+                sh "./mvnw clean test -e"
+                }
+            }
+        }
+        stage("Paso 4: Build .Jar"){
             steps {
                 script {
                 sh "echo 'Build .Jar!'"

@@ -22,10 +22,7 @@ jobs:
           command: "mvn clean compile -e"
       - run:
           name: "Test Code"
-          command: "mvn clean test -e"
-      - run:
-          name: "Test 2 Code"
-          command: "mvn clean test -e"
+          command: "mvn clean test -e"S
       - run:
           name: "Build .Jar"
           command: "mvn clean package -e"

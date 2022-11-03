@@ -24,6 +24,9 @@ jobs:
           name: "Test Code"
           command: "mvn clean test -e"
       - run:
+          name: "Test 2 Code"
+          command: "mvn clean test -e"
+      - run:
           name: "Build .Jar"
           command: "mvn clean package -e"
 

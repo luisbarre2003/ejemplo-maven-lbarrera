@@ -50,6 +50,15 @@ pipeline {
                 }
             }
         }
+        stage("Paso 6: Build 2 .Jar"){
+            steps {
+                script {
+                sh "echo 'Build .Jar!'"
+                // Run Maven on a Unix agent.
+                sh "./mvnw clean package -e"
+                }
+            }
+        }
     }
     post {
         always {

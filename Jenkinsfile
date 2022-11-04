@@ -23,7 +23,7 @@ pipeline {
                 }
             }
         }
-        stage("Paso 3: Test 2"){
+        stage("Paso 3: Test prueba 0411"){
             steps {
                 script {
                 sh "echo 'Test Code!'"
@@ -32,7 +32,16 @@ pipeline {
                 }
             }
         }
-        stage("Paso 4: Build .Jar"){
+        stage("Paso 4: Test 2"){
+            steps {
+                script {
+                sh "echo 'Test Code!'"
+                // Run Maven on a Unix agent.
+                sh "./mvnw clean test -e"
+                }
+            }
+        }
+        stage("Paso 5: Build .Jar"){
             steps {
                 script {
                 sh "echo 'Build .Jar!'"

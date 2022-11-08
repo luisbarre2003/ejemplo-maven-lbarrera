@@ -12,6 +12,7 @@ pipeline {
                 // Run Maven on a Unix agent.
                 sh "./mvnw clean compile -e"
                 }
+                
             }
         }
     }

@@ -22,6 +22,8 @@
 
 ### Compile Code
 * ./mvnw clean compile -e
+asasas
+asasas
 
 ### Test Code
 * ./mvnw clean test -e

@@ -11,10 +11,6 @@ def getBuildUser(){
 pipeline {
     agent any
     
-    enviroment{ 
-        BUILD_USER = '' 
-    }
-    
     stages {
         stage("Saludar"){
             steps {

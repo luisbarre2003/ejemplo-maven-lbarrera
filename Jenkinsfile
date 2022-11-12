@@ -5,8 +5,8 @@ def jsonParse(def json) {
 }
 
 def COLOR_MAP = [ 
-    'SUCCESS' : 'GOOD', 
-    'FAILURE' : 'DANGER' 
+    'SUCCESS' : 'good', 
+    'FAILURE' : 'danger' 
 ]
 
 def getBuildUser(){ 

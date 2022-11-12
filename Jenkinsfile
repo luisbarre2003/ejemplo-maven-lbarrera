@@ -4,11 +4,6 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
-def COLOR_MAP = [ 
-    'SUCCESS' : 'good', 
-    'FAILURE' : 'danger' 
-]
-
 def getBuildUser(){ 
     return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId() 
 }
@@ -42,7 +37,7 @@ pipeline {
                 BUILD_USER = getBuildUser() 
             }
 
-            slackSend channel: 'jen-example' color : COLOR_MAP[currentBuild.currentResult], message: "{currentBuild.currentResult}: Job {env.BUILD_NUMBER} by {SPEC} at {env.BUILD_URL}HTML_20Report/"
+            slackSend channel: 'jen-example', message: "{currentBuild.currentResult}: Job {env.BUILD_NUMBER} by {SPEC} at {env.BUILD_URL}HTML_20Report/"
             
             sh "echo 'fase always executed post'"
         }

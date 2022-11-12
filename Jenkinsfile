@@ -1,5 +1,4 @@
 import groovy.json.JsonSlurperClassic
-import static org.jenkinsci.plugins.conditionalbuildstep.singlestep.JobUpdater.*
 
 def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
@@ -30,11 +29,8 @@ pipeline {
     }
     post {
         always {
-            script{ 
-                BUILD_USER = getBuildUser() 
-            }
-
-            slackSend channel: 'jen-example', message: "{currentBuild.currentResult}: Job {env.BUILD_NUMBER} by {SPEC} at {env.BUILD_URL}HTML_20Report/"
+            
+            slackSend channel: 'jen-example', message: "Respuesta Jenkins"
             
             sh "echo 'fase always executed post'"
         }

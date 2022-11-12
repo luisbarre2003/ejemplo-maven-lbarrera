@@ -66,3 +66,31 @@ docker run -it --rm -v $(pwd):/code --workdir /code maven mvn clean package -e
 ### Run Jar
 docker run -it --rm -p 8081:8081  -v $(pwd):/code --workdir /code maven mvn spring-boot:run
 ```
+
+
+*****dentro de import
+
+def COLOR_MAP = [
+  'SUCCESS' : 'GOOD'
+  'FAILURE' : 'DANGER'
+]
+
+def getBuildUser(){
+  return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
+}
+
+*****dentro de pipeline
+
+enviroment{
+  BUILD_USER = ''
+}
+
+*****DENTRO DE POST always
+
+script{
+    BUILD_USER = getBuildUser()
+}
+
+slackSend channel: 'jen-example'
+          color : COLOR_MAP[currentBuild.currentResult],
+          message: "*{currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER} \n Test executed ${SPEC} at ${BROWSER} \n more info at ${env.BUILD_URL}HTML_20Report/"

@@ -1,4 +1,5 @@
 import groovy.json.JsonSlurperClassic
+import static org.jenkinsci.plugins.conditionalbuildstep.singlestep.JobUpdater.*
 
 def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)

@@ -3,6 +3,11 @@ import groovy.json.JsonSlurperClassic
 def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
+
+def COLOR_MAP = [ 'SUCCESS' : 'GOOD' 'FAILURE' : 'DANGER' ]
+
+def getBuildUser(){ return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId() }
+
 pipeline {
     agent any
     stages {
@@ -20,9 +25,14 @@ pipeline {
                 sh './mvnw clean verify sonar:sonar'
             }
         }
+        enviroment{ BUILD_USER = '' }
     }
     post {
         always {
+            script{ BUILD_USER = getBuildUser() }
+
+            slackSend channel: 'jen-example' color : COLOR_MAP[currentBuild.currentResult], message: "{currentBuild.currentResult}: Job {env.BUILD_NUMBER} by {SPEC} at {env.BUILD_URL}HTML_20Report/"
+            
             sh "echo 'fase always executed post'"
         }
         success {

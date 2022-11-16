@@ -50,13 +50,9 @@ pipeline {
             } 
         }
          stage('SonarQube analysis') {
-              steps {
-                    def scannerHome = tool 'SonarScanner 4.0';
-                    withSonarQubeEnv('sonarqube') { 
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
-              }
-        }
+    withSonarQubeEnv('sonarqube') { 
+      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+    }
     }
     post {
         always {

@@ -49,11 +49,6 @@ pipeline {
     }
     post {
         always {
-            script{ 
-                BUILD_USER = getBuildUser() 
-            }
-
-            slackSend channel: 'jen-example', message: "{currentBuild.currentResult}: Job {env.BUILD_NUMBER} by {SPEC} at {env.BUILD_URL}HTML_20Report/"
             
             sh "echo 'fase always executed post'"
         }

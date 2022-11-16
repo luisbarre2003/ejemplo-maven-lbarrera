@@ -47,11 +47,12 @@ pipeline {
                     sh './mvnw clean verify sonar:sonar -Dsonar.projectKey=custom-project-key -Dsonar.projectName=custom-project-key'
                    
                 }
-            }
-        stage('SonarQube analysis') {
-                withSonarQubeEnv('sonarqube') { // You can override the credential to be used
-                  sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.projectKey=custom-project-key -Dsonar.projectName=custom-project-key'
-             }
+            } 
+         stage('SonarQube analysis') {
+                def scannerHome = tool 'SonarScanner 4.0';
+                withSonarQubeEnv('sonarqube') { // If you have configured more than one global server connection, you can specify its name
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
         }
     }
     post {

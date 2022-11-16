@@ -41,15 +41,16 @@ pipeline {
         }
         stage("Paso 4: Análisis SonarQube"){
             steps {
-                sh "echo 'Calling sonar Service in another docker container!'"
-                // Run Maven on a Unix agent to execute Sonar.
-                sh './mvnw clean verify sonar:sonar'
+                withSonarQubeEnv('sonarqube') {
+                    sh "echo 'Calling sonar Service in another docker container!'"
+                    // Run Maven on a Unix agent to execute Sonar.
+                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=custom-project-key -Dsonar.projectName=custom-project-key'
+                }
             }
         }
     }
     post {
         always {
-            
             sh "echo 'fase always executed post'"
         }
         success {
